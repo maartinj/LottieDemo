@@ -31,7 +31,9 @@ struct AddProgressView: View {
                 }
                 .disabled(inProgress)
                 if inProgress {
-                    ProgressView()
+                    LottiePlusView(name: Constants.politeChicky,
+                               loopMode: .loop)
+                    .frame(width: 250)
                 }
             }
             .navigationTitle("Custom Progress")

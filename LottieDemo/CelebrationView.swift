@@ -12,22 +12,30 @@ import SwiftUI
 
 struct CelebrationView: View {
     @State private var score = 0
+    @State private var play = false
     var body: some View {
         NavigationStack {
-            VStack {
-                Button("Can I celebrate") {
-                    score = score == 5 ? 0 : (score + 1)
-                    print(score)
-                    if score == 5 {
-                        print("Celebrate")
-                    } else {
-                        print("Not Yet")
+            ZStack {
+                VStack {
+                    Button("Can I celebrate") {
+                        score = score == 5 ? 0 : (score + 1)
+                        print(score)
+                        if score == 5 {
+                            play = true
+                        }
                     }
+                    .buttonStyle(.bordered)
+                    Text("Score: \(score)")
                 }
-                .buttonStyle(.bordered)
-                Text("Score: \(score)")
+                .navigationTitle("Celebration")
+                LottiePlusView(name: Constants.confetti,
+                               animationSpeed: 2,
+                               contentMode: .scaleAspectFill,
+                               play: $play)
+                .id(score)
+                .allowsHitTesting(false)
             }
-            .navigationTitle("Celebration")
+            .ignoresSafeArea()
         }
     }
 }
